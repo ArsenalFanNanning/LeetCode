@@ -31,6 +31,36 @@ public class Solution0002 {
     }
 
     /**
+     * @param l1 节点1
+     * @param l2 节点2
+     * @return
+     */
+    public static Solution0002ListNode optimalAddTwoNumbers(Solution0002ListNode l1, Solution0002ListNode l2) {
+        Solution0002ListNode c1 = l1;
+        Solution0002ListNode c2 = l2;
+        Solution0002ListNode sentinel = new Solution0002ListNode(0);
+        Solution0002ListNode d = sentinel;
+        int sum = 0;
+        while (c1 != null || c2 != null) {
+            sum /= 10;
+            if (c1 != null) {
+                sum += c1.value;
+                c1 = c1.next;
+            }
+            if (c2 != null) {
+                sum += c2.value;
+                c2 = c2.next;
+            }
+            d.next = new Solution0002ListNode(sum % 10);
+            d = d.next;
+        }
+        if (sum / 10 == 1)
+            d.next = new Solution0002ListNode(1);
+        return sentinel.next;
+    }
+
+    /**
+     * 我的方法是直接按逻辑处理，但是代码繁杂
      * @param firstLinked  链表一
      * @param secondLinked 链表二
      * @return 相加后的链表
