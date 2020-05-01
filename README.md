@@ -1,4 +1,4 @@
-My LeetCode
+LeetCode
 =======
 **The purpose of LeetCode is to provide you hands-on training on real coding interview questions. The Online Judge gives you immediate feedback on the correctness and efficiency of your algorithm which facilitates a great learning experience.**
 
