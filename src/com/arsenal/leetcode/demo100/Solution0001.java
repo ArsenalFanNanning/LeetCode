@@ -19,7 +19,7 @@ public class Solution0001 {
         int[] nums = {2, 7, 11, 15};
         int target = 17;
         //int[] subIndex = twoSum(nums, target);
-        int[] subIndex = optimizeTwoSum(nums, target);
+        int[] subIndex = optimalTwoSum(nums, target);
         System.out.println(Arrays.toString(subIndex));
     }
 
@@ -38,7 +38,7 @@ public class Solution0001 {
      * @param target 和
      * @return 下标数组
      */
-    public static int[] optimizeTwoSum(int[] nums, int target) {
+    public static int[] optimalTwoSum(int[] nums, int target) {
         if (nums.length < 3) {
             return null;
         }
