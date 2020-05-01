@@ -21,6 +21,12 @@ public class Solution0001 {
         System.out.println(Arrays.toString(subIndex));
     }
 
+    /**
+     * 我的方法比较容易理解，但是效率较低，时间复杂度O(n^2)
+     * @param nums   数组
+     * @param target 和
+     * @return 下标数组
+     */
     public static int[] twoSum(int[] nums, int target) {
         if (nums.length < 3) {
             return null;
