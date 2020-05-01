@@ -22,6 +22,17 @@ public class Solution0001 {
     }
 
     /**
+     * 大佬的解决方案效率高，时间复杂度O(n)
+     * @param nums   数组
+     * @param target 和
+     * @return 下标数组
+     */
+    public static int[] optimizeTwoSum(int[] nums, int target) {
+
+        return null;
+    }
+
+    /**
      * 我的方法比较容易理解，但是效率较低，时间复杂度O(n^2)
      * @param nums   数组
      * @param target 和
