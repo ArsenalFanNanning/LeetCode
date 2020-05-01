@@ -4,7 +4,7 @@ LeetCode
 
 * [中文版](./README_CN.md)
 
-0001 Two Sum
+0001 Two Sum <span style="float:right">Easy</span>
 ---
 
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
