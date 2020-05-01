@@ -26,6 +26,10 @@ public class Solution0002 {
         System.out.println("secondLinked:");
         secondLinked.list();
     }
+
+    public static Solution0002Linked addTwoNumbers(Solution0002Linked firstLinked, Solution0002Linked secondLinked) {
+        return null;
+    }
 }
 
 class Solution0002Linked {
