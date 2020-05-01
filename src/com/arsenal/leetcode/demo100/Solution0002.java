@@ -15,15 +15,72 @@ package com.arsenal.leetcode.demo100;
  */
 public class Solution0002 {
     public static void main(String[] args) {
-
+        Solution0002Linked firstLinked = new Solution0002Linked(2);
+        firstLinked.addNode(4);
+        firstLinked.addNode(3);
+        Solution0002Linked secondLinked = new Solution0002Linked(5);
+        secondLinked.addNode(6);
+        secondLinked.addNode(4);
+        System.out.println("firstLinked:");
+        firstLinked.list();
+        System.out.println("secondLinked:");
+        secondLinked.list();
     }
 }
 
-class ListNode {
-    public int value;
-    public ListNode next;
+class Solution0002Linked {
+    public Solution0002ListNode head;
 
-    ListNode(int value) {
+    Solution0002Linked(int value) {
+        if (head == null) {
+            head = new Solution0002ListNode(value);
+        }
+    }
+
+    public void addNode(int value) {
+        if (head == null) {
+            return;
+        }
+        Solution0002ListNode temp = head;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+        }
+        temp.next = new Solution0002ListNode(value);
+    }
+
+    public void list() {
+        if (head == null) {
+            System.out.println("Empty Linked");
+            return;
+        }
+        Solution0002ListNode temp = head;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            System.out.print(temp + "\t");
+            temp = temp.next;
+        }
+        System.out.print(temp + "\t");
+        System.out.println();
+    }
+}
+
+class Solution0002ListNode {
+    public int value;
+    public Solution0002ListNode next;
+
+    Solution0002ListNode(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "ListNode{" +
+                "value=" + value +
+                '}';
     }
 }
