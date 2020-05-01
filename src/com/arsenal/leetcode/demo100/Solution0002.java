@@ -20,17 +20,51 @@ public class Solution0002 {
         firstLinked.addNode(3);
         Solution0002Linked secondLinked = new Solution0002Linked(5);
         secondLinked.addNode(6);
-        secondLinked.addNode(4);
+        //secondLinked.addNode(4);
         System.out.println("firstLinked:");
         firstLinked.list();
         System.out.println("secondLinked:");
         secondLinked.list();
+        System.out.println("=============Result=============");
+        Solution0002Linked resultLinked = addTwoNumbers(firstLinked, secondLinked);
+        resultLinked.list();
     }
 
+    /**
+     * @param firstLinked  链表一
+     * @param secondLinked 链表二
+     * @return 相加后的链表
+     */
     public static Solution0002Linked addTwoNumbers(Solution0002Linked firstLinked, Solution0002Linked secondLinked) {
 
-        return null;
+        if (firstLinked != null && secondLinked == null) {
+            return firstLinked;
+        }
+
+        if (firstLinked == null && secondLinked != null) {
+            return secondLinked;
+        }
+
+        if (firstLinked == null && secondLinked == null) {
+            return null;
+        }
+
+        int firstNumber = firstLinked.getLinkedNumber();
+        int secondNumber = secondLinked.getLinkedNumber();
+        int total = firstNumber + secondNumber;
+        System.out.println("total:" + total);
+        StringBuffer sb = new StringBuffer(total + "");
+        sb.reverse();
+        String reverseTotal = sb.toString();
+        System.out.println("reverseTotal:" + reverseTotal);
+        char[] chars = reverseTotal.toCharArray();
+        Solution0002Linked resultLinked = new Solution0002Linked(Integer.parseInt(chars[0] + ""));
+        for (int i = 1; i < chars.length; i++) {
+            resultLinked.addNode(Integer.parseInt(chars[i] + ""));
+        }
+        return resultLinked;
     }
+
 }
 
 class Solution0002Linked {
@@ -58,6 +92,21 @@ class Solution0002Linked {
             temp = temp.next;
         }
         temp.next = new Solution0002ListNode(value);
+    }
+
+    public int getLinkedNumber() {
+        StringBuffer sb = new StringBuffer();
+        Solution0002ListNode temp = head;
+        while (true) {
+            sb.append(temp.value);
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+        }
+        sb.reverse();
+        System.out.println("sb.toString()" + sb.toString());
+        return Integer.parseInt(sb.toString());
     }
 
     /**
