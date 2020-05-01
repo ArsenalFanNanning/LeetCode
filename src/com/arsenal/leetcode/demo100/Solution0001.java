@@ -23,6 +23,7 @@ public class Solution0001 {
 
     /**
      * 大佬的解决方案效率高，时间复杂度O(n)
+     * https://leetcode.com/problems/two-sum/discuss/3/Accepted-Java-O(n)-Solution
      * @param nums   数组
      * @param target 和
      * @return 下标数组
@@ -34,6 +35,11 @@ public class Solution0001 {
 
     /**
      * 我的方法比较容易理解，但是效率较低，时间复杂度O(n^2)
+     *
+     * 时间复杂度：O(n^2)
+     * 对于每个元素，我们试图通过遍历数组的其余部分来寻找它所对应的目标元素，这将耗费 O(n) 的时间。因此时间复杂度为 O(n2)。
+     * 空间复杂度：O(1)。
+     *
      * @param nums   数组
      * @param target 和
      * @return 下标数组
