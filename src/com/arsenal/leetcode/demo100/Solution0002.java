@@ -28,6 +28,7 @@ public class Solution0002 {
     }
 
     public static Solution0002Linked addTwoNumbers(Solution0002Linked firstLinked, Solution0002Linked secondLinked) {
+
         return null;
     }
 }
@@ -41,6 +42,10 @@ class Solution0002Linked {
         }
     }
 
+    /**
+     * 添加链表节点
+     * @param value 值
+     */
     public void addNode(int value) {
         if (head == null) {
             return;
@@ -55,6 +60,29 @@ class Solution0002Linked {
         temp.next = new Solution0002ListNode(value);
     }
 
+    /**
+     * 获取链表长度
+     * @return 链表长度
+     */
+    public int length() {
+        int len = 0;
+        if (head == null) {
+            return len;
+        }
+        Solution0002ListNode temp = head;
+        while (true) {
+            len++;
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+        }
+        return len;
+    }
+
+    /**
+     * 遍历链表
+     */
     public void list() {
         if (head == null) {
             System.out.println("Empty Linked");
