@@ -20,7 +20,7 @@ public class Solution0002 {
         firstLinked.addNode(3);
         Solution0002Linked secondLinked = new Solution0002Linked(5);
         secondLinked.addNode(6);
-        //secondLinked.addNode(4);
+        secondLinked.addNode(4);
         System.out.println("firstLinked:");
         firstLinked.list();
         System.out.println("secondLinked:");
@@ -28,9 +28,37 @@ public class Solution0002 {
         System.out.println("=============Result=============");
         Solution0002Linked resultLinked = addTwoNumbers(firstLinked, secondLinked);
         resultLinked.list();
+
+        System.out.println("=============Optimal=============");
+        Solution0002ListNode l1 = new Solution0002ListNode(2);
+        Solution0002ListNode l11 = new Solution0002ListNode(4);
+        Solution0002ListNode l111 = new Solution0002ListNode(3);
+        l1.next = l11;
+        l11.next = l111;
+
+        Solution0002ListNode l2 = new Solution0002ListNode(5);
+        Solution0002ListNode l22 = new Solution0002ListNode(6);
+        Solution0002ListNode l222 = new Solution0002ListNode(4);
+        l2.next = l22;
+        l22.next = l222;
+
+        Solution0002ListNode resultNode = optimalAddTwoNumbers(l1, l2);
+        while (true) {
+            System.out.println(resultNode);
+            if (resultNode.next == null) {
+                break;
+            }
+            resultNode = resultNode.next;
+        }
     }
 
     /**
+     * 大佬的解决方案效率高，时间复杂度O(max(m,n))
+     * https://leetcode.com/problems/add-two-numbers/discuss/1010/Is-this-Algorithm-optimal-or-what
+     * <p>
+     * 时间复杂度：O(max(m,n))，假设m和n分别表示l1和l2的长度，上面的算法最多重复max(m,n)次。
+     * <p>
+     * 空间复杂度：O(max(m,n))，新列表的长度最多为max(m,n)+1。
      * @param l1 节点1
      * @param l2 节点2
      * @return
