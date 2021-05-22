@@ -6,4 +6,7 @@ package com.arsenal.leetcode.demo100;
  * @Description:
  */
 public class Solution0004 {
+    public static void main(String[] args) {
+
+    }
 }
