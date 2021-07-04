@@ -29,5 +29,6 @@ public class Solution0003 {
         System.out.println("Hello World");
         System.out.println("Hello World");
         System.out.println("Hello Java");
+        System.out.println("Hello Java");
     }
 }
