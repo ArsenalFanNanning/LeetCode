@@ -15,5 +15,6 @@ public class Solution0005 {
         System.out.println("Hello PHP");
         System.out.println("Hello Python");
         System.out.println("Hello Python");
+        System.out.println("Hello Python");
     }
 }
