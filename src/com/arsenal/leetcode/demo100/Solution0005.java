@@ -10,6 +10,7 @@ public class Solution0005 {
         System.out.println("Hello World");
         System.out.println("Hello World");
         System.out.println("Hello Java");
+        System.out.println("Hello Java");
         System.out.println("Hello PHP");
         System.out.println("Hello Python");
     }
