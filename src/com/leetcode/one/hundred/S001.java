@@ -56,23 +56,13 @@ public class S001 {
     }
 
     public static int[] violence(int[] nums, int target) {
-        boolean f = false;
-        int[] index = new int[2];
         for (int i = 0; i < nums.length; i++) {
-            int t = target - nums[i];
             for (int j = i + 1; j < nums.length; j++) {
-                if (t == nums[j]) {
-                    f = true;
-                    index[0] = i;
-                    index[1] = j;
-                    break;
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
                 }
             }
-            if (f) {
-                break;
-            }
         }
-        return index;
+        return new int[0];
     }
-
 }
