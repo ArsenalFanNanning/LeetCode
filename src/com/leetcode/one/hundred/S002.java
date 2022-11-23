@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-11-22 00:06
@@ -41,17 +44,29 @@ package com.leetcode.one.hundred;
  */
 public class S002 {
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2);
-        ListNode l12 = new ListNode(4);
-        ListNode l13 = new ListNode(3);
+        //[9,9,9,9,9,9,9]
+        ListNode l1 = new ListNode(9);
+        ListNode l12 = new ListNode(9);
+        ListNode l13 = new ListNode(9);
+        ListNode l14 = new ListNode(9);
+        ListNode l15 = new ListNode(9);
+        ListNode l16 = new ListNode(9);
+        ListNode l17 = new ListNode(9);
         l1.next = l12;
         l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        l15.next = l16;
+        l16.next = l17;
 
-        ListNode l2 = new ListNode(5);
-        ListNode l22 = new ListNode(6);
-        ListNode l23 = new ListNode(4);
+        //[9,9,9,9]
+        ListNode l2 = new ListNode(9);
+        ListNode l22 = new ListNode(9);
+        ListNode l23 = new ListNode(9);
+        ListNode l24 = new ListNode(9);
         l2.next = l22;
         l22.next = l23;
+        l23.next = l24;
 
         ListNode listNode = addTwoNumbers(l1, l2);
         ListNode cur = listNode;
@@ -63,7 +78,100 @@ public class S002 {
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode cur = l1;
-        return cur;
+        String num1 = "";
+        while (cur != null) {
+            num1 += cur.val;
+            cur = cur.next;
+        }
+
+        cur = l2;
+        String num2 = "";
+        while (cur != null) {
+            num2 += cur.val;
+            cur = cur.next;
+        }
+
+
+        //System.out.println("num1=" + num1 + ",num2=" + num2);
+        StringBuilder num = new StringBuilder();
+        List<ListNode> nums = new ArrayList<>();
+        int len1 = num1.length();
+        int len2 = num2.length();
+        int len = Math.min(len1, len2);
+        int r = 0;
+        int carry = 0;
+        //num1=942,num2=9465
+        while (r < len) {
+            char ch1 = num1.charAt(r);
+            char ch2 = num2.charAt(r);
+            int value = Character.getNumericValue(ch1) + Character.getNumericValue(ch2) + carry;
+            if (value < 10) {
+                carry = 0;
+                num.append(value);
+                nums.add(new ListNode(value));
+            } else {
+                num.append(value % 10);
+                nums.add(new ListNode(value % 10));
+                carry = 1;
+            }
+            r++;
+        }
+
+        if (len1 < len2) {
+            while (r < len2) {
+                int value = Character.getNumericValue(num2.charAt(r)) + carry;
+                if (value < 10) {
+                    num.append(value);
+                    nums.add(new ListNode(value));
+                    carry = 0;
+                } else {
+                    num.append(value % 10);
+                    nums.add(new ListNode(value % 10));
+                    carry = 1;
+                }
+                r++;
+            }
+            // 加最后一次的进位
+            if (carry == 1) {
+                num.append(carry);
+                nums.add(new ListNode(carry));
+            }
+        }
+
+        if (len2 < len1) {
+            while (r < len1) {
+                int value = Character.getNumericValue(num1.charAt(r)) + carry;
+                if (value < 10) {
+                    carry = 0;
+                    num.append(value);
+                    nums.add(new ListNode(value));
+                } else {
+                    carry = 1;
+                    nums.add(new ListNode(value % 10));
+                    num.append(value % 10);
+                }
+                r++;
+            }
+            // 加最后一次的进位
+            if (carry == 1) {
+                num.append(carry);
+                nums.add(new ListNode(carry));
+            }
+        }
+
+        if (len2 == len1 && carry == 1) {
+            nums.add(new ListNode(carry));
+        }
+
+        for (int i = 1; i < nums.size(); i++) {
+            nums.get(i - 1).next = nums.get(i);
+        }
+
+        System.out.println(num);
+        System.out.println(nums);
+
+        //[7,0,4,0,1]
+        return nums.get(0);
     }
 }
 
