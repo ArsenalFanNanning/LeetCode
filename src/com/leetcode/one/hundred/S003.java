@@ -1,9 +1,12 @@
 package com.leetcode.one.hundred;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-11-24 23:32
- * @Description: 无重复字符的最长子串
+ * @Description: 无重复字符的最长子串-中等
  * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
  * 示例 1:
  * 输入: s = "abcabcbb"
@@ -21,9 +24,55 @@ package com.leetcode.one.hundred;
  * 提示：
  * 0 <= s.length <= 5 * 104
  * s 由英文字母、数字、符号和空格组成
+ * Given a string s, find the length of the longest
+ * substring
+ * without repeating characters.
+ * Example 1:
+ * Input: s = "abcabcbb"
+ * Output: 3
+ * Explanation: The answer is "abc", with the length of 3.
+ * Example 2:
+ * Input: s = "bbbbb"
+ * Output: 1
+ * Explanation: The answer is "b", with the length of 1.
+ * Example 3:
+ * Input: s = "pwwkew"
+ * Output: 3
+ * Explanation: The answer is "wke", with the length of 3.
+ * Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+ * Constraints:
+ * 0 <= s.length <= 5 * 104
+ * s consists of English letters, digits, symbols and spaces.
  */
 public class S003 {
     public static void main(String[] args) {
+        String s = "pwwkew";
+        System.out.println(lengthOfLongestSubstring(s));
+    }
 
+    public static int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+        Set<Character> set = new HashSet<>();
+        int len = s.length();
+        int r = 0, start = 0, m = 0;
+        while (r < len) {
+            char ch = s.charAt(r);
+            if (!set.contains(ch)) {
+                set.add(ch);
+                if (set.size() == 1) {
+                    start = r;
+                }
+                m = Math.max(m, r - start + 1);
+            } else {
+                r = start;
+                set.clear();
+            }
+
+            r++;
+        }
+
+        return m;
     }
 }
