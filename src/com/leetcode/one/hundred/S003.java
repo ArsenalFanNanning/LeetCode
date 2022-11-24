@@ -48,11 +48,25 @@ import java.util.Set;
 public class S003 {
     public static void main(String[] args) {
         String s = "pwwkew";
+        //System.out.println(violence(s));
         System.out.println(lengthOfLongestSubstring(s));
     }
 
     public static int lengthOfLongestSubstring(String s) {
-       return 1;
+        // 每次左指针右移一位，移除set的一个字符，这一步会导致很多无用的循环。while循环发现的重复字符不一定就是Set最早添加那个，
+        // 还要好多次循环才能到达，这些都是无效循环，不如直接用map记下每个字符的索引，直接进行跳转
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max = 0, start = 0;
+        for (int end = 0; end < s.length(); end++) {
+            char ch = s.charAt(end);
+            if (map.containsKey(ch)) {
+                start = Math.max(map.get(ch) + 1, start);
+            }
+            max = Math.max(max, end - start + 1);
+            map.put(ch, end);
+        }
+        System.out.println(map);
+        return max;
     }
 
     private static int violence(String s) {
