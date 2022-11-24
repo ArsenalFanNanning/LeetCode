@@ -1,5 +1,6 @@
 package com.leetcode.one.hundred;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,6 +52,10 @@ public class S003 {
     }
 
     public static int lengthOfLongestSubstring(String s) {
+       return 1;
+    }
+
+    private static int violence(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
