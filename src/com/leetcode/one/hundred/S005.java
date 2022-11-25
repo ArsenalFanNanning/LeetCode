@@ -33,10 +33,40 @@ package com.leetcode.one.hundred;
  */
 public class S005 {
     public static void main(String[] args) {
-
+        String s = "cbbd";
+        System.out.println(longestPalindrome(s));
     }
 
-    public String longestPalindrome(String s) {
-        return "";
+    public static String longestPalindrome(String s) {
+        String res = s.charAt(0) + "";
+        int len = s.length();
+        int l = 0, r = 0, m = 0;
+        while (r < len) {
+            char ch = s.charAt(r);
+            int index = s.indexOf(ch, r + 1);
+            while (index != -1) {
+                if (isPalindrome(s.substring(l, index + 1))) {
+                    if (m < index - l + 1) {
+                        m = index - l + 1;
+                        res = s.substring(l, index + 1);
+                    }
+                }
+                index = s.indexOf(ch, index + 1);
+            }
+            l++;
+            r++;
+        }
+
+        return res;
+    }
+
+    private static boolean isPalindrome(String s) {
+        int l = 0, r = s.length() - 1;
+        while (l <= r) {
+            if (s.charAt(l++) != s.charAt(r--)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
