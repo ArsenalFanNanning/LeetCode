@@ -48,7 +48,8 @@ public class S004 {
         int[] nums1 = {1, 2};
         int[] nums2 = {3, 4};
         //System.out.println(violence(nums1, nums2));
-        System.out.println(findMedianSortedArrays(nums1, nums2));
+        System.out.println(optimize(nums1, nums2));
+        //System.out.println(findMedianSortedArrays(nums1, nums2));
     }
 
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -85,6 +86,49 @@ public class S004 {
         }
 
         return (m + n) % 2 == 0 ? (median1 + median2) / 2.0 : median1;
+    }
+
+
+    public static double optimize(int[] nums1, int[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        int len = len1 + len2;
+        if (len == 0) {
+            return 0;
+        }
+
+        int mid = len / 2;
+        boolean f = (len & 1) == 0;
+        double sum = 0;
+        double t = 0;
+        int i = 0, j = 0, k = 0;
+        while (i < len1 || j < len2) {
+            int a = i == len1 ? Integer.MAX_VALUE : nums1[i];
+            int b = j == len2 ? Integer.MAX_VALUE : nums2[j];
+            if (a <= b) {
+                t = a;
+                i++;
+            } else {
+                t = b;
+                j++;
+            }
+
+            if (f && k == mid - 1) {
+                sum += t;
+            }
+
+            if (k == mid) {
+                sum += t;
+                if (f) {
+                    return sum / 2;
+                } else {
+                    return sum;
+                }
+            }
+            k++;
+        }
+
+        return sum;
     }
 
 
