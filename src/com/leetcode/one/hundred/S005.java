@@ -34,10 +34,35 @@ package com.leetcode.one.hundred;
 public class S005 {
     public static void main(String[] args) {
         String s = "cbbd";
-        System.out.println(longestPalindrome(s));
+        System.out.println(violence(s));
     }
 
     public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    public static int expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            --left;
+            ++right;
+        }
+        return right - left - 1;
+    }
+
+    public static String violence(String s) {
         String res = s.charAt(0) + "";
         int len = s.length();
         int l = 0, r = 0, m = 0;
