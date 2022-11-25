@@ -34,7 +34,8 @@ package com.leetcode.one.hundred;
 public class S005 {
     public static void main(String[] args) {
         String s = "cbbd";
-        System.out.println(violence(s));
+       // System.out.println(violence(s));
+        System.out.println(longestPalindrome(s));
     }
 
     public static String longestPalindrome(String s) {
