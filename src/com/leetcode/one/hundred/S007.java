@@ -39,10 +39,66 @@ package com.leetcode.one.hundred;
  */
 public class S007 {
     public static void main(String[] args) {
-
+        int x = -2147483412;
+        System.out.println(reverse(x));
     }
 
     public static int reverse(int x) {
-        return x;
+        if (x == 0) {
+            return x;
+        }
+
+        boolean f = x < 0;
+        String str = f ? (x + "").substring(1) : x + "";
+        String numStr = "";
+        int len = str.length();
+        for (int i = len - 1; i >= 0; i--) {
+            char ch = str.charAt(i);
+            if ('0' == ch && numStr.isEmpty()) {
+                continue;
+            }
+            numStr += ch;
+        }
+
+        System.out.println(numStr);
+
+        numStr = getNumStr(numStr, f);
+        int res = f ? -Integer.parseInt(numStr) : Integer.parseInt(numStr);
+        return res;
+    }
+
+    private static String getNumStr(String numStr, boolean f) {
+
+        int len = numStr.length();
+        //-2147483648
+        // 2143847412
+        if (f && len == 10) {
+            String min = (Integer.MIN_VALUE + "").substring(1);
+            for (int i = 0; i < len; i++) {
+                char ch1 = numStr.charAt(i);
+                char ch2 = min.charAt(i);
+                if (ch2 < ch1) {
+                    return "0";
+                } else if (ch1 < ch2) {
+                    return numStr;
+                }
+            }
+        }
+
+        //2147483647
+        //2143847412
+        if (!f && len == 10) {
+            String max = Integer.MAX_VALUE + "";
+            for (int i = 0; i < len; i++) {
+                char ch1 = numStr.charAt(i);
+                char ch2 = max.charAt(i);
+                if (ch1 < ch2) {
+                    return numStr;
+                } else if (ch2 < ch1) {
+                    return "0";
+                }
+            }
+        }
+        return numStr;
     }
 }
