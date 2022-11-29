@@ -110,4 +110,7 @@ package com.leetcode.one.hundred;
  * s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
  */
 public class S008 {
+    public static void main(String[] args) {
+
+    }
 }
