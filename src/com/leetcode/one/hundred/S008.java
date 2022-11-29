@@ -113,4 +113,8 @@ public class S008 {
     public static void main(String[] args) {
 
     }
+
+    public static int myAtoi(String s) {
+        return 0;
+    }
 }
