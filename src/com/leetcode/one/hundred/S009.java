@@ -43,11 +43,18 @@ package com.leetcode.one.hundred;
  */
 public class S009 {
     public static void main(String[] args) {
-        int x = -121;
+        int x = 121;
         System.out.println(isPalindrome(x));
     }
 
     public static boolean isPalindrome(int x) {
+        String s = x + "";
+        int l = 0, r = s.length() - 1;
+        while (l <= r) {
+            if (s.charAt(l++) != s.charAt(r--)) {
+                return false;
+            }
+        }
         return true;
     }
 }
