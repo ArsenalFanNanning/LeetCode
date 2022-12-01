@@ -51,4 +51,13 @@ package com.leetcode.one.hundred;
  * It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
  */
 public class S010 {
+    public static void main(String[] args) {
+        String s = "aa";
+        String p = "a";
+        System.out.println(isMatch(s, p));
+    }
+
+    public static boolean isMatch(String s, String p) {
+        return true;
+    }
 }
