@@ -53,7 +53,7 @@ package com.leetcode.one.hundred;
 public class S010 {
     public static void main(String[] args) {
         String s = "aa";
-        String p = "a";
+        String p = "a*";
         System.out.println(isMatch(s, p));
     }
 
