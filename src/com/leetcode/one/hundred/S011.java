@@ -39,4 +39,12 @@ package com.leetcode.one.hundred;
  * 0 <= height[i] <= 104
  */
 public class S011 {
+    public static void main(String[] args) {
+        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        System.out.println(maxArea(height));
+    }
+
+    public static int maxArea(int[] height) {
+        return 1;
+    }
 }
