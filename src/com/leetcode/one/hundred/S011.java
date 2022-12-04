@@ -41,15 +41,21 @@ package com.leetcode.one.hundred;
 public class S011 {
     public static void main(String[] args) {
         int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println(violence(height));
         //System.out.println(violence(height));
+        System.out.println(maxArea(height));
     }
 
     public static int maxArea(int[] height) {
-        return 1;
+        int l = 0, r = height.length - 1, max = 0;
+        while (l < r) {
+            max = height[l] < height[r] ?
+                    Math.max(max, (r - l) * height[l++]) :
+                    Math.max(max, (r - l) * height[r--]);
+        }
+        return max;
     }
 
-    //超时
+    //超出时间限制
     public static int violence(int[] height) {
         if (height == null || height.length == 0) {
             return 0;
