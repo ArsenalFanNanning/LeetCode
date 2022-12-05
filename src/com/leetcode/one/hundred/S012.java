@@ -78,6 +78,131 @@ public class S012 {
     }
 
     public static String intToRoman(int num) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            int place = place(num);
+            int digit = num / place;
+            deal(digit, place, sb);
+            num %= place;
+        }
+        return sb.toString();
+    }
+
+    private static void deal(int digit, int place, StringBuilder sb) {
+        if (digit == 0) {
+            return;
+        }
+
+        switch (place) {
+            case 1000:
+                sb.append(thousand(digit));
+                break;
+            case 100:
+                sb.append(hundred(digit));
+                break;
+            case 10:
+                sb.append(ten(digit));
+                break;
+            case 1:
+                sb.append(unit(digit));
+                break;
+        }
+    }
+
+    private static String unit(int digit) {
+        switch (digit) {
+            case 1:
+                return "I";
+            case 2:
+                return "II";
+            case 3:
+                return "III";
+            case 4:
+                return "IV";
+            case 5:
+                return "V";
+            case 6:
+                return "VI";
+            case 7:
+                return "VII";
+            case 8:
+                return "VIII";
+            case 9:
+                return "IX";
+        }
+
+        return "ERROR";
+    }
+
+    private static String ten(int digit) {
+        switch (digit) {
+            case 1:
+                return "X";
+            case 2:
+                return "XX";
+            case 3:
+                return "XXX";
+            case 4:
+                return "XL";
+            case 5:
+                return "L";
+            case 6:
+                return "LX";
+            case 7:
+                return "LXX";
+            case 8:
+                return "LXXX";
+            case 9:
+                return "XC";
+        }
+
+        return "ERROR";
+    }
+
+
+    private static String hundred(int digit) {
+        switch (digit) {
+            case 1:
+                return "C";
+            case 2:
+                return "CC";
+            case 3:
+                return "CCC";
+            case 4:
+                return "CD";
+            case 5:
+                return "D";
+            case 6:
+                return "DC";
+            case 7:
+                return "DCC";
+            case 8:
+                return "DCCC";
+            case 9:
+                return "CM";
+        }
+
+        return "ERROR";
+    }
+
+    private static String thousand(int digit) {
+        switch (digit) {
+            case 1:
+                return "M";
+            case 2:
+                return "MM";
+            case 3:
+                return "MMM";
+        }
+
+        return "ERROR";
+    }
+
+    private static int place(int num) {
+        int dev = 1;
+        while (num / dev >= 10) {
+            dev *= 10;
+        }
+        return dev;
     }
 }
