@@ -72,4 +72,12 @@ package com.leetcode.one.hundred;
  * 1 <= num <= 3999
  */
 public class S012 {
+    public static void main(String[] args) {
+        int num = 1994;
+        System.out.println(intToRoman(num));
+    }
+
+    public static String intToRoman(int num) {
+        return "";
+    }
 }
