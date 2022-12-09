@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-09 23:45
@@ -36,4 +38,12 @@ package com.leetcode.one.hundred;
  * digits[i] is a digit in the range ['2', '9'].
  */
 public class S017 {
+    public static void main(String[] args) {
+        String digits = "23";
+        System.out.println(letterCombinations(digits));
+    }
+
+    public static List<String> letterCombinations(String digits) {
+        return null;
+    }
 }
