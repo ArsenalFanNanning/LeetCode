@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-11 15:59
@@ -38,4 +41,14 @@ package com.leetcode.one.hundred;
  * -109 <= target <= 109
  */
 public class S018 {
+    public static void main(String[] args) {
+        int[] nums = {1, 0, -1, 0, -2, 2};
+        int target = 0;
+        System.out.println(fourSum(nums, target));
+    }
+
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        return res;
+    }
 }
