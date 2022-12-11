@@ -1,7 +1,9 @@
 package com.leetcode.one.hundred;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @Author: Arsenal
@@ -41,7 +43,8 @@ import java.util.List;
 public class S017 {
     public static void main(String[] args) {
         String digits = "23";
-        System.out.println(letterCombinations(digits));
+        // System.out.println(letterCombinations(digits));
+        System.out.println(letterCombinations_queue(digits));
     }
 
     public static List<String> letterCombinations(String digits) {
@@ -67,5 +70,26 @@ public class S017 {
             backtracking(prefix, combinations, digits);
             prefix.deleteCharAt(prefix.length() - 1); // 删除
         }
+    }
+
+    public static List<String> letterCombinations_queue(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return new ArrayList<>();
+        }
+        String[] letters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("");
+        for (char digit : digits.toCharArray()) {
+            int index = Character.digit(digit, 10) - 2;
+            String letter = letters[index];
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String tmp = queue.poll();
+                for (char c : letter.toCharArray()) {
+                    queue.offer(tmp + c);
+                }
+            }
+        }
+        return new ArrayList<>(queue);
     }
 }
