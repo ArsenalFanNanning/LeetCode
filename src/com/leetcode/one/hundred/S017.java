@@ -1,8 +1,7 @@
 package com.leetcode.one.hundred;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: Arsenal
@@ -46,17 +45,27 @@ public class S017 {
     }
 
     public static List<String> letterCombinations(String digits) {
-        Map<Character, String> phoneMap = new HashMap<Character, String>() {{
-            put('2', "abc");
-            put('3', "def");
-            put('4', "ghi");
-            put('5', "jkl");
-            put('6', "mno");
-            put('7', "pqrs");
-            put('8', "tuv");
-            put('9', "wxyz");
-        }};
+        List<String> combinations = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return combinations;
+        }
+        backtracking(new StringBuilder(), combinations, digits);
+        return combinations;
+    }
 
-        return null;
+    private static final String[] KEYS = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+    private static void backtracking(StringBuilder prefix, List<String> combinations, final String digits) {
+        if (prefix.length() == digits.length()) {
+            combinations.add(prefix.toString());
+            return;
+        }
+        int curDigits = digits.charAt(prefix.length()) - '0';
+        String letters = KEYS[curDigits];
+        for (char c : letters.toCharArray()) {
+            prefix.append(c);                         // 添加
+            backtracking(prefix, combinations, digits);
+            prefix.deleteCharAt(prefix.length() - 1); // 删除
+        }
     }
 }
