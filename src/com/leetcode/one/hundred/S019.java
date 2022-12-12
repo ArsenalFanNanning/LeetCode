@@ -39,4 +39,11 @@ package com.leetcode.one.hundred;
  * Follow up: Could you do this in one pass?
  */
 public class S019 {
+    public static void main(String[] args) {
+
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        return null;
+    }
 }
