@@ -2,6 +2,7 @@ package com.leetcode.one.hundred;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public class S018 {
     public static void main(String[] args) {
         int[] nums = {1, 0, -1, 0, -2, 2};
         int target = 0;
+        //System.out.println(violence(nums, target));
         System.out.println(fourSum(nums, target));
     }
 
@@ -97,5 +99,29 @@ public class S018 {
             }
         }
         return quadruplets;
+    }
+
+    public static List<List<Integer>> violence(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    for (int l = k + 1; l < nums.length; l++) {
+                        if (nums[i] + nums[j] + nums[k] + nums[l] == target) {
+                            List<Integer> ans = new ArrayList<>();
+                            ans.add(nums[i]);
+                            ans.add(nums[j]);
+                            ans.add(nums[k]);
+                            ans.add(nums[l]);
+                            Collections.sort(ans);
+                            if (!res.contains(ans)) {
+                                res.add(ans);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
     }
 }
