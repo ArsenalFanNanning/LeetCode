@@ -40,10 +40,23 @@ package com.leetcode.one.hundred;
  */
 public class S019 {
     public static void main(String[] args) {
-
+        ListNode l1 = new ListNode(9);
+        ListNode l12 = new ListNode(8);
+        ListNode l13 = new ListNode(7);
+        ListNode l14 = new ListNode(6);
+        ListNode l15 = new ListNode(5);
+        ListNode l16 = new ListNode(4);
+        ListNode l17 = new ListNode(3);
+        l1.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        l15.next = l16;
+        l16.next = l17;
+        System.out.println(removeNthFromEnd(l1, 2));
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
         return null;
     }
 }
