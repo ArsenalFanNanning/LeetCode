@@ -57,7 +57,8 @@ public class S019 {
         l15.next = l16;
         l16.next = l17;
         //System.out.println(removeNthFromEnd(l1, 2));
-        System.out.println(removeNthFromEndStack(l1, 2));
+        // System.out.println(removeNthFromEndStack(l1, 2));
+        System.out.println(removeNthFromEndTwoPoints(l1, 2));
     }
 
     public static ListNode removeNthFromEnd(ListNode head, int n) {
@@ -94,6 +95,22 @@ public class S019 {
         }
         ListNode prev = stack.peek();
         prev.next = prev.next.next;
+        ListNode ans = dummy.next;
+        return ans;
+    }
+
+    public static ListNode removeNthFromEndTwoPoints(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummy;
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
         ListNode ans = dummy.next;
         return ans;
     }
