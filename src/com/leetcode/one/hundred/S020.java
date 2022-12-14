@@ -42,4 +42,12 @@ package com.leetcode.one.hundred;
  * s consists of parentheses only '()[]{}'.
  */
 public class S020 {
+    public static void main(String[] args) {
+        String s = "()";
+        System.out.println(isValid(s));
+    }
+
+    public static boolean isValid(String s) {
+        return true;
+    }
 }
