@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-12 23:46
@@ -53,7 +56,8 @@ public class S019 {
         l14.next = l15;
         l15.next = l16;
         l16.next = l17;
-        System.out.println(removeNthFromEnd(l1, 2));
+        //System.out.println(removeNthFromEnd(l1, 2));
+        System.out.println(removeNthFromEndStack(l1, 2));
     }
 
     public static ListNode removeNthFromEnd(ListNode head, int n) {
@@ -75,5 +79,22 @@ public class S019 {
             head = head.next;
         }
         return length;
+    }
+
+    public static ListNode removeNthFromEndStack(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        Deque<ListNode> stack = new LinkedList<ListNode>();
+        ListNode cur = dummy;
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
+        for (int i = 0; i < n; ++i) {
+            stack.pop();
+        }
+        ListNode prev = stack.peek();
+        prev.next = prev.next.next;
+        ListNode ans = dummy.next;
+        return ans;
     }
 }
