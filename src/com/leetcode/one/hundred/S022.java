@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-24 18:42
@@ -25,4 +27,12 @@ package com.leetcode.one.hundred;
  * 1 <= n <= 8
  */
 public class S022 {
+    public static void main(String[] args) {
+        int n = 3;
+        System.out.println(generateParenthesis(n));
+    }
+
+    public static List<String> generateParenthesis(int n) {
+        return null;
+    }
 }
