@@ -34,4 +34,29 @@ package com.leetcode.one.hundred;
  * 0 <= Node.val <= 100
  */
 public class S024 {
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(1);
+        ListNode l12 = new ListNode(2);
+        ListNode l13 = new ListNode(3);
+        ListNode l14 = new ListNode(4);
+        ListNode l15 = new ListNode(5);
+        ListNode l16 = new ListNode(6);
+        ListNode l17 = new ListNode(8);
+        l1.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        l15.next = l16;
+        l16.next = l17;
+    }
+
+    public static ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = head.next;
+        head.next = swapPairs(newHead.next);
+        newHead.next = head;
+        return newHead;
+    }
 }
