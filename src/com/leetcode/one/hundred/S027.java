@@ -71,7 +71,23 @@ public class S027 {
         int[] nums = {3, 2, 2, 3};
         int val = 3;
         System.out.println(removeElement(nums, val));
+        System.out.println(removeElementOpt(nums, val));
     }
+
+    public static int removeElementOpt(int[] nums, int val) {
+        int left = 0;
+        int right = nums.length;
+        while (left < right) {
+            if (nums[left] == val) {
+                nums[left] = nums[right - 1];
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return left;
+    }
+
 
     public static int removeElement(int[] nums, int val) {
         int n = nums.length;
