@@ -68,6 +68,20 @@ package com.leetcode.one.hundred;
  */
 public class S027 {
     public static void main(String[] args) {
+        int[] nums = {3, 2, 2, 3};
+        int val = 3;
+        System.out.println(removeElement(nums, val));
+    }
 
+    public static int removeElement(int[] nums, int val) {
+        int n = nums.length;
+        int left = 0;
+        for (int right = 0; right < n; right++) {
+            if (nums[right] != val) {
+                nums[left] = nums[right];
+                left++;
+            }
+        }
+        return left;
     }
 }
