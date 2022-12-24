@@ -64,15 +64,22 @@ public class S023 {
         ListNode l2 = new ListNode(8);
         ListNode l3 = new ListNode(7);
         ListNode[] lists = {l1, l2, l3};
-        System.out.println(mergeKLists(lists));
+        System.out.println(violence(lists));
     }
 
     public static ListNode mergeKLists(ListNode[] lists) {
-        ListNode ans = null;
-        for (int i = 0; i < lists.length; ++i) {
-            ans = mergeTwoLists(ans, lists[i]);
+        return merge(lists, 0, lists.length - 1);
+    }
+
+    public static ListNode merge(ListNode[] lists, int l, int r) {
+        if (l == r) {
+            return lists[l];
         }
-        return ans;
+        if (l > r) {
+            return null;
+        }
+        int mid = (l + r) >> 1;
+        return mergeTwoLists(merge(lists, l, mid), merge(lists, mid + 1, r));
     }
 
     public static ListNode mergeTwoLists(ListNode a, ListNode b) {
@@ -93,6 +100,15 @@ public class S023 {
         }
         tail.next = (aPtr != null ? aPtr : bPtr);
         return head.next;
+    }
+
+
+    public static ListNode violence(ListNode[] lists) {
+        ListNode ans = null;
+        for (int i = 0; i < lists.length; ++i) {
+            ans = mergeTwoLists(ans, lists[i]);
+        }
+        return ans;
     }
 
 }
