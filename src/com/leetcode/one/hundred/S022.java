@@ -32,7 +32,35 @@ public class S022 {
         int n = 3;
         System.out.println(violence(n));
         System.out.println(generateParenthesis_backtrack(n));
+        System.out.println(generateParenthesis_recursion(n));
     }
+
+    static ArrayList[] cache = new ArrayList[100];
+
+    public static List<String> generateParenthesis_recursion(int n) {
+        return generate(n);
+    }
+
+    public static List<String> generate(int n) {
+        if (cache[n] != null) {
+            return cache[n];
+        }
+        ArrayList<String> ans = new ArrayList<String>();
+        if (n == 0) {
+            ans.add("");
+        } else {
+            for (int c = 0; c < n; ++c) {
+                for (String left : generate(c)) {
+                    for (String right : generate(n - 1 - c)) {
+                        ans.add("(" + left + ")" + right);
+                    }
+                }
+            }
+        }
+        cache[n] = ans;
+        return ans;
+    }
+
 
     public static List<String> generateParenthesis_backtrack(int n) {
         List<String> ans = new ArrayList<String>();
