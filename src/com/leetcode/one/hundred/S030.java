@@ -75,9 +75,32 @@ public class S030 {
         String s = "barfoothefoobarman";
         String[] words = {"foo", "bar"};
         System.out.println(findSubstring(s, words));
+        System.out.println(findSubstringTwoPoints(s, words));
     }
 
     public static List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> res = new ArrayList<>();
+        if (s == null || s.length() == 0 || words == null || words.length == 0) return res;
+        HashMap<String, Integer> map = new HashMap<>();
+        int one_word = words[0].length();
+        int word_num = words.length;
+        int all_len = one_word * word_num;
+        for (String word : words) {
+            map.put(word, map.getOrDefault(word, 0) + 1);
+        }
+        for (int i = 0; i < s.length() - all_len + 1; i++) {
+            String tmp = s.substring(i, i + all_len);
+            HashMap<String, Integer> tmp_map = new HashMap<>();
+            for (int j = 0; j < all_len; j += one_word) {
+                String w = tmp.substring(j, j + one_word);
+                tmp_map.put(w, tmp_map.getOrDefault(w, 0) + 1);
+            }
+            if (map.equals(tmp_map)) res.add(i);
+        }
+        return res;
+    }
+
+    public static List<Integer> findSubstringTwoPoints(String s, String[] words) {
         List<Integer> res = new ArrayList<Integer>();
         int m = words.length, n = words[0].length(), ls = s.length();
         for (int i = 0; i < n; i++) {
