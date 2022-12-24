@@ -37,4 +37,31 @@ package com.leetcode.one.hundred;
  * Both list1 and list2 are sorted in non-decreasing order.
  */
 public class S021 {
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(9);
+        ListNode l12 = new ListNode(8);
+        ListNode l13 = new ListNode(7);
+        ListNode l14 = new ListNode(1);
+        ListNode l15 = new ListNode(5);
+        ListNode l16 = new ListNode(4);
+        ListNode l17 = new ListNode(2);
+        l1.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        l15.next = l16;
+        l16.next = l17;
+
+        ListNode l2 = new ListNode(1);
+        ListNode l22 = new ListNode(3);
+        ListNode l23 = new ListNode(8);
+        ListNode l24 = new ListNode(6);
+        l2.next = l22;
+        l22.next = l23;
+        l23.next = l24;
+    }
+
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        return list1;
+    }
 }
