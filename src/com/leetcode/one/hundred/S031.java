@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.Arrays;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-25 18:31
@@ -51,4 +53,40 @@ package com.leetcode.one.hundred;
  * 0 <= nums[i] <= 100
  */
 public class S031 {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        System.out.println(Arrays.toString(nums));
+        nextPermutation(nums);
+        System.out.println(Arrays.toString(nums));
+    }
+
+    public static void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[i] >= nums[j]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
+    }
+
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public static void reverse(int[] nums, int start) {
+        int left = start, right = nums.length - 1;
+        while (left < right) {
+            swap(nums, left, right);
+            left++;
+            right--;
+        }
+    }
 }
