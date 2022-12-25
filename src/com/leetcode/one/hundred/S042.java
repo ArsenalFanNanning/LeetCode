@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-25 19:37
@@ -35,6 +38,7 @@ public class S042 {
     public static void main(String[] args) {
         int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         System.out.println(trapDp(height));
+        System.out.println(trapStack(height));
     }
 
     public static int trapDp(int[] height) {
@@ -58,6 +62,26 @@ public class S042 {
         int ans = 0;
         for (int i = 0; i < n; ++i) {
             ans += Math.min(leftMax[i], rightMax[i]) - height[i];
+        }
+        return ans;
+    }
+
+    public static int trapStack(int[] height) {
+        int ans = 0;
+        Deque<Integer> stack = new LinkedList<Integer>();
+        int n = height.length;
+        for (int i = 0; i < n; ++i) {
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                int top = stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+                int left = stack.peek();
+                int currWidth = i - left - 1;
+                int currHeight = Math.min(height[left], height[i]) - height[top];
+                ans += currWidth * currHeight;
+            }
+            stack.push(i);
         }
         return ans;
     }
