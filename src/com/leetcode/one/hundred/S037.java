@@ -135,4 +135,50 @@ public class S037 {
         }
     }
 
+    private static int[] lineOpt = new int[9];
+    private static int[] columnOpt = new int[9];
+    private static int[][] blockOpt = new int[3][3];
+    private static boolean validOpt = false;
+    private static List<int[]> spacesOpt = new ArrayList<int[]>();
+
+    public static void solveSudokuOpt(char[][] board) {
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                if (board[i][j] == '.') {
+                    spacesOpt.add(new int[]{i, j});
+                } else {
+                    int digit = board[i][j] - '0' - 1;
+                    flipOpt(i, j, digit);
+                }
+            }
+        }
+
+        dfsOpt(board, 0);
+    }
+
+    public static void dfsOpt(char[][] board, int pos) {
+        if (pos == spacesOpt.size()) {
+            valid = true;
+            return;
+        }
+
+        int[] space = spacesOpt.get(pos);
+        int i = space[0], j = space[1];
+        int mask = ~(lineOpt[i] | columnOpt[j] | blockOpt[i / 3][j / 3]) & 0x1ff;
+        for (; mask != 0 && !validOpt; mask &= (mask - 1)) {
+            int digitMask = mask & (-mask);
+            int digit = Integer.bitCount(digitMask - 1);
+            flipOpt(i, j, digit);
+            board[i][j] = (char) (digit + '0' + 1);
+            dfs(board, pos + 1);
+            flipOpt(i, j, digit);
+        }
+    }
+
+    public static void flipOpt(int i, int j, int digit) {
+        lineOpt[i] ^= (1 << digit);
+        columnOpt[j] ^= (1 << digit);
+        blockOpt[i / 3][j / 3] ^= (1 << digit);
+    }
+
 }
