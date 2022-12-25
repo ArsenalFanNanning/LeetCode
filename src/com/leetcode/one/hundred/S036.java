@@ -98,6 +98,7 @@ public class S036 {
                 {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
         System.out.println(isValidSudoku(board));
         System.out.println(isValidSudokuMap(board));
+        System.out.println(isValidSudokuArray(board));
     }
 
     public static boolean isValidSudoku(char[][] board) {
@@ -122,7 +123,7 @@ public class S036 {
     }
 
     public static boolean isValidSudokuMap(char[][] board) {
-        Map<Integer, Set<Integer>> row  = new HashMap<>(), col = new HashMap<>(), area = new HashMap<>();
+        Map<Integer, Set<Integer>> row = new HashMap<>(), col = new HashMap<>(), area = new HashMap<>();
         for (int i = 0; i < 9; i++) {
             row.put(i, new HashSet<>());
             col.put(i, new HashSet<>());
@@ -138,6 +139,21 @@ public class S036 {
                 row.get(i).add(u);
                 col.get(j).add(u);
                 area.get(idx).add(u);
+            }
+        }
+        return true;
+    }
+
+    public static boolean isValidSudokuArray(char[][] board) {
+        boolean[][] row = new boolean[10][10], col = new boolean[10][10], area = new boolean[10][10];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int c = board[i][j];
+                if (c == '.') continue;
+                int u = c - '0';
+                int idx = i / 3 * 3 + j / 3;
+                if (row[i][u] || col[j][u] || area[idx][u]) return false;
+                row[i][u] = col[j][u] = area[idx][u] = true;
             }
         }
         return true;
