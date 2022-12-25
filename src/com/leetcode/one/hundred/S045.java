@@ -41,6 +41,7 @@ public class S045 {
     public static void main(String[] args) {
         int[] nums = {2, 3, 0, 1, 4};
         System.out.println(jump(nums));
+        System.out.println(jumpOpt(nums));
     }
 
     public static int jump(int[] nums) {
@@ -53,6 +54,21 @@ public class S045 {
                     steps++;
                     break;
                 }
+            }
+        }
+        return steps;
+    }
+
+    public static int jumpOpt(int[] nums) {
+        int length = nums.length;
+        int end = 0;
+        int maxPosition = 0;
+        int steps = 0;
+        for (int i = 0; i < length - 1; i++) {
+            maxPosition = Math.max(maxPosition, i + nums[i]);
+            if (i == end) {
+                end = maxPosition;
+                steps++;
             }
         }
         return steps;
