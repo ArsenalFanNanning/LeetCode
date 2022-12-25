@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-25 18:39
@@ -41,6 +44,7 @@ public class S032 {
     public static void main(String[] args) {
         String s = ")()())";
         System.out.println(longestValidParentheses(s));
+        System.out.println(longestValidParenthesesStack(s));
     }
 
     public static int longestValidParentheses(String s) {
@@ -54,6 +58,25 @@ public class S032 {
                     dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
                 }
                 maxans = Math.max(maxans, dp[i]);
+            }
+        }
+        return maxans;
+    }
+
+    public static int longestValidParenthesesStack(String s) {
+        int maxans = 0;
+        Deque<Integer> stack = new LinkedList<Integer>();
+        stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    stack.push(i);
+                } else {
+                    maxans = Math.max(maxans, i - stack.peek());
+                }
             }
         }
         return maxans;
