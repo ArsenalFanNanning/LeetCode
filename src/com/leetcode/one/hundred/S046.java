@@ -1,5 +1,9 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-26 23:26
@@ -35,4 +39,35 @@ package com.leetcode.one.hundred;
  * All the integers of nums are unique.
  */
 public class S046 {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        System.out.println(permute(nums));
+    }
+
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        backtracking(nums, res, new LinkedList<>(), new boolean[nums.length]);
+        return res;
+    }
+
+    private static void backtracking(int[] nums, List<List<Integer>> res, LinkedList<Integer> path, boolean[] used) {
+        if (nums.length == path.size()) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+            used[i] = true;
+            path.add(nums[i]);
+            backtracking(nums, res, path, used);
+            path.removeLast();
+            used[i] = false;
+        }
+    }
 }
