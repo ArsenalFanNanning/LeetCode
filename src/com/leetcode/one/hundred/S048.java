@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.Arrays;
+
 /**
  * @Author: Arsenal
  * @Date: 2022-12-30 23:57
@@ -32,4 +34,31 @@ package com.leetcode.one.hundred;
  * -1000 <= matrix[i][j] <= 1000
  */
 public class S048 {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}};
+
+        rotate(matrix);
+
+        for (int[] ints : matrix) {
+            System.out.println(Arrays.toString(ints));
+        }
+    }
+
+    public static void rotate(int[][] matrix) {
+        int n = matrix.length;
+        int[][] matrix_new = new int[n][n];
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix_new[j][n - i - 1] = matrix[i][j];
+            }
+        }
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix[i][j] = matrix_new[i][j];
+            }
+        }
+    }
 }
