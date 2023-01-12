@@ -36,7 +36,8 @@ import java.util.*;
 public class S051 {
     public static void main(String[] args) {
         int n = 4;
-        System.out.println(solveNQueens(n));
+        // System.out.println(solveNQueens(n));
+        System.out.println(solveNQueensByte(n));
     }
 
     public static List<List<String>> solveNQueens(int n) {
@@ -90,4 +91,31 @@ public class S051 {
         }
         return board;
     }
+
+
+    public static List<List<String>> solveNQueensByte(int n) {
+        int[] queens = new int[n];
+        Arrays.fill(queens, -1);
+        List<List<String>> solutions = new ArrayList<List<String>>();
+        solve(solutions, queens, n, 0, 0, 0, 0);
+        return solutions;
+    }
+
+    public static void solve(List<List<String>> solutions, int[] queens, int n, int row, int columns, int diagonals1, int diagonals2) {
+        if (row == n) {
+            List<String> board = generateBoard(queens, n);
+            solutions.add(board);
+        } else {
+            int availablePositions = ((1 << n) - 1) & (~(columns | diagonals1 | diagonals2));
+            while (availablePositions != 0) {
+                int position = availablePositions & (-availablePositions);
+                availablePositions = availablePositions & (availablePositions - 1);
+                int column = Integer.bitCount(position - 1);
+                queens[row] = column;
+                solve(solutions, queens, n, row + 1, columns | position, (diagonals1 | position) << 1, (diagonals2 | position) >> 1);
+                queens[row] = -1;
+            }
+        }
+    }
+
 }
