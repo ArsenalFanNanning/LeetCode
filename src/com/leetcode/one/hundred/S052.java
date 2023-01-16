@@ -34,7 +34,8 @@ import java.util.Set;
 public class S052 {
     public static void main(String[] args) {
         int n = 3;
-        System.out.println(totalNQueens(n));
+        // System.out.println(totalNQueens(n));
+        System.out.println(totalNQueensOpt(n));
     }
 
     public static int totalNQueens(int n) {
@@ -68,6 +69,26 @@ public class S052 {
                 columns.remove(i);
                 diagonals1.remove(diagonal1);
                 diagonals2.remove(diagonal2);
+            }
+            return count;
+        }
+    }
+
+
+    public static int totalNQueensOpt(int n) {
+        return solve(n, 0, 0, 0, 0);
+    }
+
+    public static int solve(int n, int row, int columns, int diagonals1, int diagonals2) {
+        if (row == n) {
+            return 1;
+        } else {
+            int count = 0;
+            int availablePositions = ((1 << n) - 1) & (~(columns | diagonals1 | diagonals2));
+            while (availablePositions != 0) {
+                int position = availablePositions & (-availablePositions);
+                availablePositions = availablePositions & (availablePositions - 1);
+                count += solve(n, row + 1, columns | position, (diagonals1 | position) << 1, (diagonals2 | position) >> 1);
             }
             return count;
         }
