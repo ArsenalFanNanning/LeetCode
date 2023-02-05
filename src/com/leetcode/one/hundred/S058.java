@@ -45,4 +45,21 @@ package com.leetcode.one.hundred;
  * There will be at least one word in s.
  */
 public class S058 {
+    public static void main(String[] args) {
+        String s = "   fly me   to   the moon  ";
+        System.out.println(lengthOfLastWord(s));
+    }
+
+    public static int lengthOfLastWord(String s) {
+        int index = s.length() - 1;
+        while (s.charAt(index) == ' ') {
+            index--;
+        }
+        int wordLength = 0;
+        while (index >= 0 && s.charAt(index) != ' ') {
+            wordLength++;
+            index--;
+        }
+        return wordLength;
+    }
 }
