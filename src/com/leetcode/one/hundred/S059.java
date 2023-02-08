@@ -29,7 +29,8 @@ import java.util.Arrays;
 public class S059 {
     public static void main(String[] args) {
         int n = 3;
-        int[][] matrix = generateMatrix(n);
+        //int[][] matrix = generateMatrix(n);
+        int[][] matrix = generateMatrixOpt(n);
         for (int[] ints : matrix) {
             System.out.println(Arrays.toString(ints));
         }
@@ -51,6 +52,37 @@ public class S059 {
             }
             row = row + directions[directionIndex][0];
             column = column + directions[directionIndex][1];
+        }
+        return matrix;
+    }
+
+    public static int[][] generateMatrixOpt(int n) {
+        int num = 1;
+        int[][] matrix = new int[n][n];
+        int left = 0, right = n - 1, top = 0, bottom = n - 1;
+        while (left <= right && top <= bottom) {
+            for (int column = left; column <= right; column++) {
+                matrix[top][column] = num;
+                num++;
+            }
+            for (int row = top + 1; row <= bottom; row++) {
+                matrix[row][right] = num;
+                num++;
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    matrix[bottom][column] = num;
+                    num++;
+                }
+                for (int row = bottom; row > top; row--) {
+                    matrix[row][left] = num;
+                    num++;
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
         }
         return matrix;
     }
