@@ -29,4 +29,41 @@ package com.leetcode.one.hundred;
  * 0 <= k <= 2 * 109
  */
 public class S061 {
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        ListNode l12 = new ListNode(2);
+        ListNode l13 = new ListNode(3);
+        ListNode l14 = new ListNode(4);
+        ListNode l15 = new ListNode(5);
+        head.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+
+        int k = 2;
+        System.out.println(rotateRight(head, k));
+    }
+
+    public static ListNode rotateRight(ListNode head, int k) {
+        if (k == 0 || head == null || head.next == null) {
+            return head;
+        }
+        int n = 1;
+        ListNode iter = head;
+        while (iter.next != null) {
+            iter = iter.next;
+            n++;
+        }
+        int add = n - k % n;
+        if (add == n) {
+            return head;
+        }
+        iter.next = head;
+        while (add-- > 0) {
+            iter = iter.next;
+        }
+        ListNode ret = iter.next;
+        iter.next = null;
+        return ret;
+    }
 }
