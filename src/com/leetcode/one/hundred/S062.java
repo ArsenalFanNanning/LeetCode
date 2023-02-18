@@ -50,6 +50,7 @@ public class S062 {
     public static void main(String[] args) {
         int m = 3, n = 7;
         System.out.println(uniquePaths(m, n));
+        System.out.println(uniquePathsOpt(m, n));
     }
 
     public static int uniquePaths(int m, int n) {
@@ -66,6 +67,14 @@ public class S062 {
             }
         }
         return f[m - 1][n - 1];
+    }
+
+    public static int uniquePathsOpt(int m, int n) {
+        long ans = 1;
+        for (int x = n, y = 1; y < m; ++x, ++y) {
+            ans = ans * x / y;
+        }
+        return (int) ans;
     }
 
 }
