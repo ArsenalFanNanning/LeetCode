@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.Arrays;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-02-26 23:49
@@ -44,9 +46,31 @@ package com.leetcode.one.hundred;
  * Incrementing by one gives 9 + 1 = 10.
  * Thus, the result should be [1,0].
  * Constraints:
- *     1 <= digits.length <= 100
- *     0 <= digits[i] <= 9
- *     digits does not contain any leading 0's.
+ * 1 <= digits.length <= 100
+ * 0 <= digits[i] <= 9
+ * digits does not contain any leading 0's.
  */
 public class S065 {
+    public static void main(String[] args) {
+        int[] digits = {1, 2, 3};
+        System.out.println(Arrays.toString(plusOne(digits)));
+    }
+
+    public static int[] plusOne(int[] digits) {
+        int n = digits.length;
+        for (int i = n - 1; i >= 0; --i) {
+            if (digits[i] != 9) {
+                ++digits[i];
+                for (int j = i + 1; j < n; ++j) {
+                    digits[j] = 0;
+                }
+                return digits;
+            }
+        }
+
+        // digits 中所有的元素均为 9
+        int[] ans = new int[n + 1];
+        ans[0] = 1;
+        return ans;
+    }
 }
