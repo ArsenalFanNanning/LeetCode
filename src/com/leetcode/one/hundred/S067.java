@@ -29,4 +29,14 @@ package com.leetcode.one.hundred;
  * Each string does not contain leading zeros except for the zero itself.
  */
 public class S067 {
+    public static void main(String[] args) {
+        String a = "11", b = "1";
+        System.out.println(addBinary(a, b));
+    }
+
+    public static String addBinary(String a, String b) {
+        return Integer.toBinaryString(
+                Integer.parseInt(a, 2) + Integer.parseInt(b, 2)
+        );
+    }
 }
