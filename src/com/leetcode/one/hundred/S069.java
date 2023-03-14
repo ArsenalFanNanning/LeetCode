@@ -37,6 +37,7 @@ public class S069 {
     public static void main(String[] args) {
         int x = 4;
         System.out.println(mySqrt(x));
+        System.out.println(mySqrtOpt(x));
     }
 
     public static int mySqrt(int x) {
@@ -45,6 +46,20 @@ public class S069 {
         }
         int ans = (int) Math.exp(0.5 * Math.log(x));
         return (long) (ans + 1) * (ans + 1) <= x ? ans + 1 : ans;
+    }
+
+    public static int mySqrtOpt(int x) {
+        int l = 0, r = x, ans = -1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if ((long) mid * mid <= x) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
     }
 
 }
