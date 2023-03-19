@@ -45,6 +45,7 @@ public class S070 {
         int n = 3;
         System.out.println(climbStairs(n));
         System.out.println(climbStairsOpt1(n));
+        System.out.println(climbStairsOpt2(n));
     }
 
 
@@ -84,5 +85,11 @@ public class S070 {
             }
         }
         return c;
+    }
+
+    public static int climbStairsOpt2(int n) {
+        double sqrt5 = Math.sqrt(5);
+        double fibn = Math.pow((1 + sqrt5) / 2, n + 1) - Math.pow((1 - sqrt5) / 2, n + 1);
+        return (int) Math.round(fibn / sqrt5);
     }
 }
