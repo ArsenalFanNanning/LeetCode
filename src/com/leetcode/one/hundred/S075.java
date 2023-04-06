@@ -1,5 +1,7 @@
 package com.leetcode.one.hundred;
 
+import java.util.Arrays;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-04-05 00:00
@@ -37,4 +39,31 @@ package com.leetcode.one.hundred;
  * Follow up: Could you come up with a one-pass algorithm using only constant extra space?
  */
 public class S075 {
+    public static void main(String[] args) {
+        int[] nums = {2, 0, 2, 1, 1, 0};
+        sortColors1(nums);
+        System.out.println(Arrays.toString(nums));
+    }
+
+    public static void sortColors1(int[] nums) {
+        int n = nums.length;
+        int ptr = 0;
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] == 0) {
+                int temp = nums[i];
+                nums[i] = nums[ptr];
+                nums[ptr] = temp;
+                ++ptr;
+            }
+        }
+        for (int i = ptr; i < n; ++i) {
+            if (nums[i] == 1) {
+                int temp = nums[i];
+                nums[i] = nums[ptr];
+                nums[ptr] = temp;
+                ++ptr;
+            }
+        }
+    }
+
 }
