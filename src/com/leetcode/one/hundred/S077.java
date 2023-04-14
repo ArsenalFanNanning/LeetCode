@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-04-12 23:28
@@ -40,4 +43,40 @@ package com.leetcode.one.hundred;
  * 1 <= k <= n
  */
 public class S077 {
+    public static void main(String[] args) {
+        int n = 4;
+        int k = 2;
+
+        List<List<Integer>> list = combine(n, k);
+
+        for (List<Integer> obj : list) {
+            System.out.println(obj);
+        }
+    }
+
+    static List<Integer> temp = new ArrayList<Integer>();
+    static List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public static List<List<Integer>> combine(int n, int k) {
+        dfs(1, n, k);
+        return ans;
+    }
+
+    public static void dfs(int cur, int n, int k) {
+        // 剪枝：temp 长度加上区间 [cur, n] 的长度小于 k，不可能构造出长度为 k 的 temp
+        if (temp.size() + (n - cur + 1) < k) {
+            return;
+        }
+        // 记录合法的答案
+        if (temp.size() == k) {
+            ans.add(new ArrayList<Integer>(temp));
+            return;
+        }
+        // 考虑选择当前位置
+        temp.add(cur);
+        dfs(cur + 1, n, k);
+        temp.remove(temp.size() - 1);
+        // 考虑不选择当前位置
+        dfs(cur + 1, n, k);
+    }
 }
