@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-04-16 09:41
@@ -33,4 +36,30 @@ package com.leetcode.one.hundred;
  * All the numbers of nums are unique.
  */
 public class S078 {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+
+        List<List<Integer>> lists = subsets(nums);
+
+        for (List<Integer> list : lists) {
+            System.out.println(list);
+        }
+    }
+
+    static List<Integer> t = new ArrayList<Integer>();
+    static List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public static List<List<Integer>> subsets(int[] nums) {
+        int n = nums.length;
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            t.clear();
+            for (int i = 0; i < n; ++i) {
+                if ((mask & (1 << i)) != 0) {
+                    t.add(nums[i]);
+                }
+            }
+            ans.add(new ArrayList<Integer>(t));
+        }
+        return ans;
+    }
 }
