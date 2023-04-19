@@ -39,7 +39,8 @@ public class S078 {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3};
 
-        List<List<Integer>> lists = subsets(nums);
+        // List<List<Integer>> lists = subsets(nums);
+        List<List<Integer>> lists = subsetsOpt(nums);
 
         for (List<Integer> list : lists) {
             System.out.println(list);
@@ -61,5 +62,21 @@ public class S078 {
             ans.add(new ArrayList<Integer>(t));
         }
         return ans;
+    }
+
+    public static List<List<Integer>> subsetsOpt(int[] nums) {
+        dfs(0, nums);
+        return ans;
+    }
+
+    public static void dfs(int cur, int[] nums) {
+        if (cur == nums.length) {
+            ans.add(new ArrayList<Integer>(t));
+            return;
+        }
+        t.add(nums[cur]);
+        dfs(cur + 1, nums);
+        t.remove(t.size() - 1);
+        dfs(cur + 1, nums);
     }
 }
