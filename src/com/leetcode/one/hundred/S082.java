@@ -30,4 +30,40 @@ package com.leetcode.one.hundred;
  * The list is guaranteed to be sorted in ascending order.
  */
 public class S082 {
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        ListNode l12 = new ListNode(1);
+        ListNode l13 = new ListNode(1);
+        ListNode l14 = new ListNode(2);
+        ListNode l15 = new ListNode(3);
+        head.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+
+        System.out.println(deleteDuplicates(head));
+    }
+
+    public static ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode dummy = new ListNode(0, head);
+
+        ListNode cur = dummy;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                int x = cur.next.val;
+                while (cur.next != null && cur.next.val == x) {
+                    cur.next = cur.next.next;
+                }
+            } else {
+                cur = cur.next;
+            }
+        }
+
+        return dummy.next;
+    }
+
 }
