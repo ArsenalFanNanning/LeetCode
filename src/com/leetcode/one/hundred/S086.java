@@ -32,4 +32,42 @@ package com.leetcode.one.hundred;
  * -200 <= x <= 200
  */
 public class S086 {
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        ListNode l12 = new ListNode(2);
+        ListNode l13 = new ListNode(3);
+        ListNode l14 = new ListNode(2);
+        ListNode l15 = new ListNode(5);
+        ListNode l16 = new ListNode(2);
+        head.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        l15.next = l16;
+
+        int x = 3;
+
+        ListNode partition = partition(head, x);
+        System.out.println(partition);
+    }
+
+    public static ListNode partition(ListNode head, int x) {
+        ListNode small = new ListNode(0);
+        ListNode smallHead = small;
+        ListNode large = new ListNode(0);
+        ListNode largeHead = large;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                large.next = head;
+                large = large.next;
+            }
+            head = head.next;
+        }
+        large.next = null;
+        small.next = largeHead.next;
+        return smallHead.next;
+    }
 }
