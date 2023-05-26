@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-05-25 00:02
@@ -59,4 +62,20 @@ package com.leetcode.one.hundred;
  * 1 <= n <= 16
  */
 public class S089 {
+    public static void main(String[] args) {
+        int n = 1;
+        System.out.println(grayCode(n));
+    }
+
+    public static List<Integer> grayCode(int n) {
+        List<Integer> ret = new ArrayList<Integer>();
+        ret.add(0);
+        for (int i = 1; i <= n; i++) {
+            int m = ret.size();
+            for (int j = m - 1; j >= 0; j--) {
+                ret.add(ret.get(j) | (1 << (i - 1)));
+            }
+        }
+        return ret;
+    }
 }
