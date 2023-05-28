@@ -64,7 +64,8 @@ import java.util.List;
 public class S089 {
     public static void main(String[] args) {
         int n = 1;
-        System.out.println(grayCode(n));
+        //System.out.println(grayCode(n));
+        System.out.println(grayCodeOpt(n));
     }
 
     public static List<Integer> grayCode(int n) {
@@ -78,4 +79,13 @@ public class S089 {
         }
         return ret;
     }
+
+    public static List<Integer> grayCodeOpt(int n) {
+        List<Integer> ret = new ArrayList<Integer>();
+        for (int i = 0; i < 1 << n; i++) {
+            ret.add((i >> 1) ^ i);
+        }
+        return ret;
+    }
+
 }
