@@ -1,5 +1,9 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-05-29 21:49
@@ -31,4 +35,38 @@ package com.leetcode.one.hundred;
  * -10 <= nums[i] <= 10
  */
 public class S090 {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 2};
+        List<List<Integer>> lists = subsetsWithDup(nums);
+        for (List<Integer> list : lists) {
+            System.out.println(list);
+        }
+    }
+
+
+    static List<Integer> t = new ArrayList<Integer>();
+    static List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            t.clear();
+            boolean flag = true;
+            for (int i = 0; i < n; ++i) {
+                if ((mask & (1 << i)) != 0) {
+                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
+                        flag = false;
+                        break;
+                    }
+                    t.add(nums[i]);
+                }
+            }
+            if (flag) {
+                ans.add(new ArrayList<Integer>(t));
+            }
+        }
+        return ans;
+    }
+
 }
