@@ -37,7 +37,9 @@ import java.util.List;
 public class S090 {
     public static void main(String[] args) {
         int[] nums = {1, 2, 2};
-        List<List<Integer>> lists = subsetsWithDup(nums);
+
+        // List<List<Integer>> lists = subsetsWithDup(nums);
+        List<List<Integer>> lists = subsetsWithDupOpt(nums);
         for (List<Integer> list : lists) {
             System.out.println(list);
         }
@@ -67,6 +69,27 @@ public class S090 {
             }
         }
         return ans;
+    }
+
+
+    public static List<List<Integer>> subsetsWithDupOpt(int[] nums) {
+        Arrays.sort(nums);
+        dfs(false, 0, nums);
+        return ans;
+    }
+
+    public static void dfs(boolean choosePre, int cur, int[] nums) {
+        if (cur == nums.length) {
+            ans.add(new ArrayList<Integer>(t));
+            return;
+        }
+        dfs(false, cur + 1, nums);
+        if (!choosePre && cur > 0 && nums[cur - 1] == nums[cur]) {
+            return;
+        }
+        t.add(nums[cur]);
+        dfs(true, cur + 1, nums);
+        t.remove(t.size() - 1);
     }
 
 }
