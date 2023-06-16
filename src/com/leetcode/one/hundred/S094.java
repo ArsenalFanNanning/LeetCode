@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-06-13 00:01
@@ -35,4 +38,32 @@ package com.leetcode.one.hundred;
  * Follow up: Recursive solution is trivial, could you do it iteratively?
  */
 public class S094 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        root.left = node1;
+        root.right = node2;
+        node2.right = node3;
+
+        List<Integer> list = inorderTraversal(root);
+        System.out.println(list);
+    }
+
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        inorder(root, res);
+        return res;
+    }
+
+    public static void inorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, res);
+        res.add(root.val);
+        inorder(root.right, res);
+    }
+
 }
