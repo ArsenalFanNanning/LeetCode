@@ -29,7 +29,8 @@ package com.leetcode.one.hundred;
 public class S096 {
     public static void main(String[] args) {
         int n = 3;
-        System.out.println(numTrees(n));
+        //System.out.println(numTrees(n));
+        System.out.println(numTreesOpt(n));
     }
 
     public static int numTrees(int n) {
@@ -43,5 +44,14 @@ public class S096 {
             }
         }
         return G[n];
+    }
+
+    public static int numTreesOpt(int n) {
+        // 提示：我们在这里需要用 long 类型防止计算过程中的溢出
+        long C = 1;
+        for (int i = 0; i < n; ++i) {
+            C = C * 2 * (2 * i + 1) / (i + 2);
+        }
+        return (int) C;
     }
 }
