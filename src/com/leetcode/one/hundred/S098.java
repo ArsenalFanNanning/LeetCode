@@ -39,4 +39,31 @@ package com.leetcode.one.hundred;
  * -231 <= Node.val <= 231 - 1
  */
 public class S098 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(3);
+        TreeNode node3 = new TreeNode(5);
+        root.left = node1;
+        root.right = node2;
+        node2.right = node3;
+
+        System.out.println(isValidBST(root));
+    }
+
+
+    public static boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public static boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+    }
+
 }
