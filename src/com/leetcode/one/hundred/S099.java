@@ -1,5 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-07-04 22:18
@@ -34,4 +37,61 @@ package com.leetcode.one.hundred;
  * Follow up: A solution using O(n) space is pretty straight-forward. Could you devise a constant O(1) space solution?
  */
 public class S099 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(2);
+        TreeNode node2 = new TreeNode(4);
+        TreeNode node3 = new TreeNode(6);
+        root.left = node1;
+        root.right = node2;
+        node2.right = node3;
+
+        recoverTree(root);
+    }
+
+    public static void recoverTree(TreeNode root) {
+        List<Integer> nums = new ArrayList<Integer>();
+        inorder(root, nums);
+        int[] swapped = findTwoSwapped(nums);
+        recover(root, 2, swapped[0], swapped[1]);
+    }
+
+    public static void inorder(TreeNode root, List<Integer> nums) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, nums);
+        nums.add(root.val);
+        inorder(root.right, nums);
+    }
+
+    public static int[] findTwoSwapped(List<Integer> nums) {
+        int n = nums.size();
+        int index1 = -1, index2 = -1;
+        for (int i = 0; i < n - 1; ++i) {
+            if (nums.get(i + 1) < nums.get(i)) {
+                index2 = i + 1;
+                if (index1 == -1) {
+                    index1 = i;
+                } else {
+                    break;
+                }
+            }
+        }
+        int x = nums.get(index1), y = nums.get(index2);
+        return new int[]{x, y};
+    }
+
+    public static void recover(TreeNode root, int count, int x, int y) {
+        if (root != null) {
+            if (root.val == x || root.val == y) {
+                root.val = root.val == x ? y : x;
+                if (--count == 0) {
+                    return;
+                }
+            }
+            recover(root.right, count, x, y);
+            recover(root.left, count, x, y);
+        }
+    }
 }
