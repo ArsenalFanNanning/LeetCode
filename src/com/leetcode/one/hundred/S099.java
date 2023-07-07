@@ -1,6 +1,8 @@
 package com.leetcode.one.hundred;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -46,10 +48,11 @@ public class S099 {
         root.right = node2;
         node2.right = node3;
 
-        recoverTree(root);
+        //recoverTree1(root);
+        recoverTree2(root);
     }
 
-    public static void recoverTree(TreeNode root) {
+    public static void recoverTree1(TreeNode root) {
         List<Integer> nums = new ArrayList<Integer>();
         inorder(root, nums);
         int[] swapped = findTwoSwapped(nums);
@@ -93,5 +96,37 @@ public class S099 {
             recover(root.right, count, x, y);
             recover(root.left, count, x, y);
         }
+    }
+
+
+    public static void recoverTree2(TreeNode root) {
+        Deque<TreeNode> stack = new ArrayDeque<TreeNode>();
+        TreeNode x = null, y = null, pred = null;
+
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pred != null && root.val < pred.val) {
+                y = root;
+                if (x == null) {
+                    x = pred;
+                } else {
+                    break;
+                }
+            }
+            pred = root;
+            root = root.right;
+        }
+
+        swap(x, y);
+    }
+
+    public static void swap(TreeNode x, TreeNode y) {
+        int tmp = x.val;
+        x.val = y.val;
+        y.val = tmp;
     }
 }
