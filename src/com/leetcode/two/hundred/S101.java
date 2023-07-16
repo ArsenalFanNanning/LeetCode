@@ -2,6 +2,9 @@ package com.leetcode.two.hundred;
 
 import com.leetcode.one.hundred.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-07-13 23:08
@@ -38,7 +41,8 @@ public class S101 {
         root.left = node1;
         root.right = node3;
 
-        System.out.println(isSymmetric(root));
+        //System.out.println(isSymmetric(root));
+        System.out.println(isSymmetricOpt(root));
     }
 
     public static boolean isSymmetric(TreeNode root) {
@@ -53,6 +57,34 @@ public class S101 {
             return false;
         }
         return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
+    }
+
+
+    public static boolean isSymmetricOpt(TreeNode root) {
+        return checkOpt(root, root);
+    }
+
+    public static boolean checkOpt(TreeNode u, TreeNode v) {
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(u);
+        q.offer(v);
+        while (!q.isEmpty()) {
+            u = q.poll();
+            v = q.poll();
+            if (u == null && v == null) {
+                continue;
+            }
+            if ((u == null || v == null) || (u.val != v.val)) {
+                return false;
+            }
+
+            q.offer(u.left);
+            q.offer(v.right);
+
+            q.offer(u.right);
+            q.offer(v.left);
+        }
+        return true;
     }
 
 }
