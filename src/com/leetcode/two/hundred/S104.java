@@ -55,7 +55,8 @@ public class S104 {
         root.right = node3;
 
         // flatten1(root);
-        flatten2(root);
+        // flatten2(root);
+        flatten3(root);
     }
 
     public static void flatten1(TreeNode root) {
@@ -98,6 +99,24 @@ public class S104 {
                 stack.push(left);
             }
             prev = curr;
+        }
+    }
+
+
+    public static void flatten3(TreeNode root) {
+        TreeNode curr = root;
+        while (curr != null) {
+            if (curr.left != null) {
+                TreeNode next = curr.left;
+                TreeNode predecessor = next;
+                while (predecessor.right != null) {
+                    predecessor = predecessor.right;
+                }
+                predecessor.right = curr.right;
+                curr.left = null;
+                curr.right = next;
+            }
+            curr = curr.right;
         }
     }
 
