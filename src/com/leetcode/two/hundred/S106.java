@@ -2,7 +2,9 @@ package com.leetcode.two.hundred;
 
 import com.leetcode.one.hundred.TreeNode;
 
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -48,7 +50,8 @@ public class S106 {
         int[] inorder = {9, 3, 15, 20, 7};
         int[] postorder = {9, 15, 7, 20, 3};
 
-        TreeNode treeNode = buildTree(inorder, postorder);
+        // TreeNode treeNode = buildTree(inorder, postorder);
+        TreeNode treeNode = buildTreeOpt(inorder, postorder);
         System.out.println(treeNode);
     }
 
@@ -93,4 +96,31 @@ public class S106 {
 
         return helper(0, inorder.length - 1);
     }
+
+    public static TreeNode buildTreeOpt(int[] inorder, int[] postorder) {
+        if (postorder == null || postorder.length == 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[postorder.length - 1]);
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        stack.push(root);
+        int inorderIndex = inorder.length - 1;
+        for (int i = postorder.length - 2; i >= 0; i--) {
+            int postorderVal = postorder[i];
+            TreeNode node = stack.peek();
+            if (node.val != inorder[inorderIndex]) {
+                node.right = new TreeNode(postorderVal);
+                stack.push(node.right);
+            } else {
+                while (!stack.isEmpty() && stack.peek().val == inorder[inorderIndex]) {
+                    node = stack.pop();
+                    inorderIndex--;
+                }
+                node.left = new TreeNode(postorderVal);
+                stack.push(node.left);
+            }
+        }
+        return root;
+    }
+
 }
