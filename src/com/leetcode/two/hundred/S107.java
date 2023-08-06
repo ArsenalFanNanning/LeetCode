@@ -1,5 +1,12 @@
 package com.leetcode.two.hundred;
 
+import com.leetcode.one.hundred.TreeNode;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-08-04 23:29
@@ -35,4 +42,42 @@ package com.leetcode.two.hundred;
  * -1000 <= Node.val <= 1000
  */
 public class S107 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node3 = new TreeNode(3);
+        root.left = node1;
+        root.right = node3;
+
+        List<List<Integer>> lists = levelOrderBottom(root);
+        for (List<Integer> list : lists) {
+            System.out.println(list);
+        }
+    }
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> levelOrder = new LinkedList<List<Integer>>();
+        if (root == null) {
+            return levelOrder;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<Integer>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                TreeNode left = node.left, right = node.right;
+                if (left != null) {
+                    queue.offer(left);
+                }
+                if (right != null) {
+                    queue.offer(right);
+                }
+            }
+            levelOrder.add(0, level);
+        }
+        return levelOrder;
+    }
 }
