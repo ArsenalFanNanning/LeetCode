@@ -2,6 +2,8 @@ package com.leetcode.two.hundred;
 
 import com.leetcode.one.hundred.TreeNode;
 
+import java.util.Random;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-08-08 23:42
@@ -79,6 +81,26 @@ public class S108 {
         TreeNode root = new TreeNode(nums[mid]);
         root.left = helper2(nums, left, mid - 1);
         root.right = helper2(nums, mid + 1, right);
+        return root;
+    }
+
+    static Random rand = new Random();
+
+    public static TreeNode sortedArrayToBST3(int[] nums) {
+        return helper3(nums, 0, nums.length - 1);
+    }
+
+    public static TreeNode helper3(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        // 选择任意一个中间位置数字作为根节点
+        int mid = (left + right + rand.nextInt(2)) / 2;
+
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper3(nums, left, mid - 1);
+        root.right = helper3(nums, mid + 1, right);
         return root;
     }
 
