@@ -43,7 +43,9 @@ public class S108 {
     public static void main(String[] args) {
         int[] nums = {-10, -3, 0, 5, 9};
         // TreeNode treeNode = sortedArrayToBST1(nums);
-        TreeNode treeNode = sortedArrayToBST2(nums);
+        // TreeNode treeNode = sortedArrayToBST2(nums);
+        //TreeNode treeNode = sortedArrayToBST3(nums);
+        TreeNode treeNode = sortedArrayToBST4(nums);
         System.out.println(treeNode);
     }
 
@@ -101,6 +103,25 @@ public class S108 {
         TreeNode root = new TreeNode(nums[mid]);
         root.left = helper3(nums, left, mid - 1);
         root.right = helper3(nums, mid + 1, right);
+        return root;
+    }
+
+
+    public static TreeNode sortedArrayToBST4(int[] nums) {
+        return helper4(nums, 0, nums.length - 1);
+    }
+
+    public static TreeNode helper4(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        // 选择任意一个中间位置数字作为根节点
+        int mid = (left + right + rand.nextInt(2)) / 2;
+
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper4(nums, left, mid - 1);
+        root.right = helper4(nums, mid + 1, right);
         return root;
     }
 
