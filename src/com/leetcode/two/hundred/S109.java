@@ -1,5 +1,8 @@
 package com.leetcode.two.hundred;
 
+import com.leetcode.one.hundred.ListNode;
+import com.leetcode.one.hundred.TreeNode;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-08-14 23:47
@@ -32,4 +35,46 @@ package com.leetcode.two.hundred;
  * -105 <= Node.val <= 105
  */
 public class S109 {
+    public static void main(String[] args) {
+        ListNode head = new ListNode(-10);
+        ListNode node1 = new ListNode(-3);
+        ListNode node2 = new ListNode(0);
+        ListNode node3 = new ListNode(5);
+        ListNode node4 = new ListNode(9);
+
+        head.next = node1;
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+
+        TreeNode treeNode = sortedListToBST(head);
+        System.out.println(treeNode);
+
+    }
+
+    public static TreeNode sortedListToBST(ListNode head) {
+        return buildTree(head, null);
+    }
+
+    public static TreeNode buildTree(ListNode left, ListNode right) {
+        if (left == right) {
+            return null;
+        }
+        ListNode mid = getMedian(left, right);
+        TreeNode root = new TreeNode(mid.val);
+        root.left = buildTree(left, mid);
+        root.right = buildTree(mid.next, right);
+        return root;
+    }
+
+    public static ListNode getMedian(ListNode left, ListNode right) {
+        ListNode fast = left;
+        ListNode slow = left;
+        while (fast != right && fast.next != right) {
+            fast = fast.next;
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 }
