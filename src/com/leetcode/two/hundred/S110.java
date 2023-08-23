@@ -45,7 +45,8 @@ public class S110 {
         root.left = node1;
         root.right = node3;
 
-        System.out.println(isBalanced(root));
+        // System.out.println(isBalanced(root));
+        System.out.println(isBalancedOpt(root));
     }
 
     public static boolean isBalanced(TreeNode root) {
@@ -61,6 +62,24 @@ public class S110 {
             return 0;
         } else {
             return Math.max(height(root.left), height(root.right)) + 1;
+        }
+    }
+
+
+    public static boolean isBalancedOpt(TreeNode root) {
+        return heightOpt(root) >= 0;
+    }
+
+    public static int heightOpt(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = heightOpt(root.left);
+        int rightHeight = heightOpt(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
         }
     }
 
