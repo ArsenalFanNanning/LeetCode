@@ -45,6 +45,7 @@ public class S111 {
         root.right = node3;
 
         System.out.println(minDepth(root));
+        System.out.println(minDepthOpt(root));
     }
 
     public static int minDepth(TreeNode root) {
