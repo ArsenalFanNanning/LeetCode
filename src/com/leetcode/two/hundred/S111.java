@@ -1,5 +1,7 @@
 package com.leetcode.two.hundred;
 
+import com.leetcode.one.hundred.TreeNode;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-08-25 23:49
@@ -32,4 +34,33 @@ package com.leetcode.two.hundred;
  * -1000 <= Node.val <= 1000
  */
 public class S111 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node3 = new TreeNode(3);
+        root.left = node1;
+        root.right = node3;
+
+        System.out.println(minDepth(root));
+    }
+
+    public static int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        int min_depth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            min_depth = Math.min(minDepth(root.left), min_depth);
+        }
+        if (root.right != null) {
+            min_depth = Math.min(minDepth(root.right), min_depth);
+        }
+
+        return min_depth + 1;
+    }
 }
