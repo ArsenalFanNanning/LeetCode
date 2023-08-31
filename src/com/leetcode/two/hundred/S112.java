@@ -66,7 +66,8 @@ public class S112 {
 
         int targetSum = 5;
 
-        System.out.println(hasPathSum(root, targetSum));
+        // System.out.println(hasPathSum(root, targetSum));
+        System.out.println(hasPathSumOpt(root, targetSum));
     }
 
     public static boolean hasPathSum(TreeNode root, int sum) {
@@ -97,4 +98,15 @@ public class S112 {
         }
         return false;
     }
+
+    public static boolean hasPathSumOpt(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null) {
+            return sum == root.val;
+        }
+        return hasPathSumOpt(root.left, sum - root.val) || hasPathSumOpt(root.right, sum - root.val);
+    }
+
 }
