@@ -1,5 +1,10 @@
 package com.leetcode.two.hundred;
 
+import com.leetcode.one.hundred.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-09-02 23:47
@@ -39,4 +44,33 @@ package com.leetcode.two.hundred;
  * Follow up: Can you flatten the tree in-place (with O(1) extra space)?
  */
 public class S113 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node3 = new TreeNode(3);
+        root.left = node1;
+        root.right = node3;
+
+        flatten(root);
+        System.out.println(root);
+    }
+
+    public static void flatten(TreeNode root) {
+        List<TreeNode> list = new ArrayList<>();
+        preorderTraversal(root, list);
+        int size = list.size();
+        for (int i = 1; i < size; i++) {
+            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            prev.right = curr;
+            prev.left = null;
+        }
+    }
+
+    public static void preorderTraversal(TreeNode root, List<TreeNode> list) {
+        if (root != null) {
+            list.add(root);
+            preorderTraversal(root.left, list);
+            preorderTraversal(root.right, list);
+        }
+    }
 }
