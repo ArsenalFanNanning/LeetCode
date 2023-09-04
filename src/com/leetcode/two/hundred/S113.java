@@ -3,6 +3,8 @@ package com.leetcode.two.hundred;
 import com.leetcode.one.hundred.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -51,11 +53,12 @@ public class S113 {
         root.left = node1;
         root.right = node3;
 
-        flatten(root);
+        // flatten1(root);
+        flatten2(root);
         System.out.println(root);
     }
 
-    public static void flatten(TreeNode root) {
+    public static void flatten1(TreeNode root) {
         List<TreeNode> list = new ArrayList<>();
         preorderTraversal(root, list);
         int size = list.size();
@@ -71,6 +74,30 @@ public class S113 {
             list.add(root);
             preorderTraversal(root.left, list);
             preorderTraversal(root.right, list);
+        }
+    }
+
+    public static void flatten2(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        stack.push(root);
+        TreeNode prev = null;
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.pop();
+            if (prev != null) {
+                prev.left = null;
+                prev.right = curr;
+            }
+            TreeNode left = curr.left, right = curr.right;
+            if (right != null) {
+                stack.push(right);
+            }
+            if (left != null) {
+                stack.push(left);
+            }
+            prev = curr;
         }
     }
 }
