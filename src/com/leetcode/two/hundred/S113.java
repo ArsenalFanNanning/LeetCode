@@ -1,5 +1,11 @@
 package com.leetcode.two.hundred;
 
+import com.leetcode.one.hundred.TreeNode;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @Author: Arsenal
  * @Date: 2023-09-06 23:56
@@ -43,4 +49,41 @@ package com.leetcode.two.hundred;
  * -1000 <= targetSum <= 1000
  */
 public class S113 {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node3 = new TreeNode(3);
+        root.left = node1;
+        root.right = node3;
+
+        int targetSum = 3;
+
+        List<List<Integer>> lists = pathSum(root, targetSum);
+        for (List<Integer> list : lists) {
+            System.out.println(list);
+        }
+
+    }
+
+    static List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    static Deque<Integer> path = new LinkedList<Integer>();
+
+    public static List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        dfs(root, targetSum);
+        return ret;
+    }
+
+    public static void dfs(TreeNode root, int targetSum) {
+        if (root == null) {
+            return;
+        }
+        path.offerLast(root.val);
+        targetSum -= root.val;
+        if (root.left == null && root.right == null && targetSum == 0) {
+            ret.add(new LinkedList<Integer>(path));
+        }
+        dfs(root.left, targetSum);
+        dfs(root.right, targetSum);
+        path.pollLast();
+    }
 }
