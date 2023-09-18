@@ -60,7 +60,18 @@ import java.util.Queue;
  */
 public class S116 {
     public static void main(String[] args) {
+        Node root = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        Node four = new Node(4);
+        root.next = two;
+        two.next = three;
+        three.next = four;
 
+        //Node node = connect(root);
+        Node node = connectOpt(root);
+
+        System.out.println(node);
     }
 
     public static Node connect(Node root) {
@@ -100,6 +111,41 @@ public class S116 {
         }
 
         // 返回根节点
+        return root;
+    }
+
+
+    public static Node connectOpt(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        // 从根节点开始
+        Node leftmost = root;
+
+        while (leftmost.left != null) {
+
+            // 遍历这一层节点组织成的链表，为下一层的节点更新 next 指针
+            Node head = leftmost;
+
+            while (head != null) {
+
+                // CONNECTION 1
+                head.left.next = head.right;
+
+                // CONNECTION 2
+                if (head.next != null) {
+                    head.right.next = head.next.left;
+                }
+
+                // 指针向后移动
+                head = head.next;
+            }
+
+            // 去下一层的最左的节点
+            leftmost = leftmost.left;
+        }
+
         return root;
     }
 
